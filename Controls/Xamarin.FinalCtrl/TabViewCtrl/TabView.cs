@@ -11,6 +11,10 @@ namespace Xamarin.FinalCtrl.TabViewCtrl
     public class TabView : Grid
     {
 
+        #region events
+        public event EventHandler SelectedItemChanged;
+        #endregion
+
         #region private member
         private readonly Grid _tabGrid;
         private readonly ContentView _mainView;
@@ -40,11 +44,11 @@ namespace Xamarin.FinalCtrl.TabViewCtrl
         #region ContentTemplateSelector
         public static readonly BindableProperty ContentTemplateSelectorProperty =
             BindableProperty.Create(nameof(ContentTemplateSelector),
-                typeof(DataTemplateSelector),
+                typeof(IContentSelector),
                 typeof(TabView));
-        public DataTemplateSelector ContentTemplateSelector
+        public IContentSelector ContentTemplateSelector
         {
-            get => (DataTemplateSelector)GetValue(ContentTemplateSelectorProperty);
+            get => (IContentSelector)GetValue(ContentTemplateSelectorProperty);
             set
             {
                 SetValue(ContentTemplateSelectorProperty, value);
@@ -54,13 +58,13 @@ namespace Xamarin.FinalCtrl.TabViewCtrl
         #endregion
 
         #region TabTemplate
-        public static readonly BindableProperty TabTemplateProperty =
-            BindableProperty.Create(nameof(TabTemplate),
-                typeof(DataTemplate),
+        public static readonly BindableProperty TabContentProperty =
+            BindableProperty.Create(nameof(TabContent),
+                typeof(ControlTemplate),
                 typeof(TabView));
-        public DataTemplate TabTemplate
+        public ControlTemplate TabContent
         {
-            get => (DataTemplate)GetValue(TabTemplateProperty);
+            get => (ControlTemplate)GetValue(TabContentProperty);
             set
             {
                 SetValue(SelectedItemProperty, value);
@@ -161,7 +165,7 @@ namespace Xamarin.FinalCtrl.TabViewCtrl
         private void CreateNewTabs()
         {
             if (ContentTemplateSelector is null) { return; }
-            if (TabTemplate is null) { return; }
+            if (TabContent is null) { return; }
             if (Itemssource is null || Itemssource.Count == 0) { return; }
 
             var itemsCollection = new object[Itemssource.Count];
@@ -173,8 +177,7 @@ namespace Xamarin.FinalCtrl.TabViewCtrl
                 _tabGrid.ColumnDefinitions.Add(new ColumnDefinition { Width = GridLength.Star });
 
                 #region tab Content
-                var tabContentTemplate = ContentTemplateSelector.SelectTemplate(SelectedItem, this);
-                var tabContent = tabContentTemplate.CreateContent();
+                var tabContent = ContentTemplateSelector.OnSelectContent(item);
                 if (tabContent is not View view)
                 {
                     throw new NotSupportedException($"Template of type {tabContent.GetType()} is not supported");
@@ -187,11 +190,8 @@ namespace Xamarin.FinalCtrl.TabViewCtrl
                 #endregion
 
                 #region tab item
-                var tabItemContent = TabTemplate.CreateContent();
-                if (tabItemContent is not View tabView)
-                {
-                    throw new NotSupportedException($"Template of type {tabItemContent.GetType()} is not supported");
-                }
+                var tabView = (View)TabContent.CreateContent();
+
                 tabView.BindingContext = item;
                 var tabItemCv = new ContentView
                 {
@@ -238,6 +238,7 @@ namespace Xamarin.FinalCtrl.TabViewCtrl
             }
 
             tv.SetTabContent();
+            tv.SelectedItemChanged?.Invoke(tv, EventArgs.Empty);
 
             if (newValue is ITabItem newTabItem)
             {
