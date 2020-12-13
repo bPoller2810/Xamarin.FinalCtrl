@@ -16,11 +16,11 @@ Simple and slim controls designed for easy use
 
 ```xml
     <ctrl:TabView
-        ContentTemplateSelector="{StaticResource MainViewTemplateSelector}"
+        ContentSelector="{StaticResource MainViewSelector}"
         Itemssource="{Binding Items}"
         TabPosition="Bottom">
-        <ctrl:TabView.TabTemplate>
-            <DataTemplate>
+        <ctrl:TabView.TabContent>
+            <ControlTemplate>
                 <StackLayout HorizontalOptions="Center" Orientation="Horizontal">
                     <Label Text="{Binding Index}" TextColor="Black" />
                     <Label
@@ -28,15 +28,16 @@ Simple and slim controls designed for easy use
                         Text="!!!"
                         TextColor="Black" />
                 </StackLayout>
-            </DataTemplate>
+            </ControlTemplate>
         </ctrl:TabView.TabTemplate>
     </ctrl:TabView>
 ```
-## Properties:
-- ContentTemplateSelector: Selectes the Template for your Tab
+
+### Properties:
+- ContentSelector (IContentSelector): Selects the Content for your Tab (This creates a new Instance each time)
 - Itemssource: The list of Tabs(ViewModels) you want to use
 - TabPosition: You want the Tabs on the Top or Bottom?
-- TabTemplate: The Template for the individual Tabs.
+- TabContent: The ControlTemplate for the individual Tabs.
 
 **Note:** If your Items implement *ITabItem*  you can access the *IsSelected* property in your bindings (See TabTemplate above).
 

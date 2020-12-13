@@ -42,16 +42,16 @@ namespace Xamarin.FinalCtrl.TabViewCtrl
         #endregion
 
         #region ContentTemplateSelector
-        public static readonly BindableProperty ContentTemplateSelectorProperty =
-            BindableProperty.Create(nameof(ContentTemplateSelector),
+        public static readonly BindableProperty ContentSelectorProperty =
+            BindableProperty.Create(nameof(ContentSelector),
                 typeof(IContentSelector),
                 typeof(TabView));
-        public IContentSelector ContentTemplateSelector
+        public IContentSelector ContentSelector
         {
-            get => (IContentSelector)GetValue(ContentTemplateSelectorProperty);
+            get => (IContentSelector)GetValue(ContentSelectorProperty);
             set
             {
-                SetValue(ContentTemplateSelectorProperty, value);
+                SetValue(ContentSelectorProperty, value);
                 OnPropertyChanged();
             }
         }
@@ -164,7 +164,7 @@ namespace Xamarin.FinalCtrl.TabViewCtrl
         }
         private void CreateNewTabs()
         {
-            if (ContentTemplateSelector is null) { return; }
+            if (ContentSelector is null) { return; }
             if (TabContent is null) { return; }
             if (Itemssource is null || Itemssource.Count == 0) { return; }
 
@@ -177,7 +177,7 @@ namespace Xamarin.FinalCtrl.TabViewCtrl
                 _tabGrid.ColumnDefinitions.Add(new ColumnDefinition { Width = GridLength.Star });
 
                 #region tab Content
-                var tabContent = ContentTemplateSelector.OnSelectContent(item);
+                var tabContent = ContentSelector.OnSelectContent(item);
                 if (tabContent is not View view)
                 {
                     throw new NotSupportedException($"Template of type {tabContent.GetType()} is not supported");
