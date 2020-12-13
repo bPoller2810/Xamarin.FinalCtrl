@@ -1,4 +1,4 @@
-﻿namespace Xamarin.FinalCtrl.TabViewCtrl
+﻿namespace Xamarin.FinalCtrl
 {
     public interface ITabItem
     {

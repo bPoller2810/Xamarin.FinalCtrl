@@ -1,9 +1,6 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Text;
-using Xamarin.Forms;
+﻿using Xamarin.Forms;
 
-namespace Xamarin.FinalCtrl.TabViewCtrl
+namespace Xamarin.FinalCtrl
 {
     public interface IContentSelector
     {

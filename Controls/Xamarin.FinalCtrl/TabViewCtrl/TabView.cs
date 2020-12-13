@@ -6,7 +6,7 @@ using System.Linq;
 using System.Text;
 using Xamarin.Forms;
 
-namespace Xamarin.FinalCtrl.TabViewCtrl
+namespace Xamarin.FinalCtrl
 {
     public class TabView : Grid
     {
@@ -42,16 +42,16 @@ namespace Xamarin.FinalCtrl.TabViewCtrl
         #endregion
 
         #region ContentTemplateSelector
-        public static readonly BindableProperty ContentSelectorProperty =
-            BindableProperty.Create(nameof(ContentSelector),
+        public static readonly BindableProperty ContentTemplateSelectorProperty =
+            BindableProperty.Create(nameof(ContentTemplateSelector),
                 typeof(IContentSelector),
                 typeof(TabView));
-        public IContentSelector ContentSelector
+        public IContentSelector ContentTemplateSelector
         {
-            get => (IContentSelector)GetValue(ContentSelectorProperty);
+            get => (IContentSelector)GetValue(ContentTemplateSelectorProperty);
             set
             {
-                SetValue(ContentSelectorProperty, value);
+                SetValue(ContentTemplateSelectorProperty, value);
                 OnPropertyChanged();
             }
         }
@@ -164,7 +164,7 @@ namespace Xamarin.FinalCtrl.TabViewCtrl
         }
         private void CreateNewTabs()
         {
-            if (ContentSelector is null) { return; }
+            if (ContentTemplateSelector is null) { return; }
             if (TabContent is null) { return; }
             if (Itemssource is null || Itemssource.Count == 0) { return; }
 
@@ -177,7 +177,7 @@ namespace Xamarin.FinalCtrl.TabViewCtrl
                 _tabGrid.ColumnDefinitions.Add(new ColumnDefinition { Width = GridLength.Star });
 
                 #region tab Content
-                var tabContent = ContentSelector.OnSelectContent(item);
+                var tabContent = ContentTemplateSelector.OnSelectContent(item);
                 if (tabContent is not View view)
                 {
                     throw new NotSupportedException($"Template of type {tabContent.GetType()} is not supported");

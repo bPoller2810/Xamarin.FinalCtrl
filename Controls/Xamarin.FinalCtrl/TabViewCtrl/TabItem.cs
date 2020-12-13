@@ -1,6 +1,6 @@
 ﻿using Xamarin.Forms;
 
-namespace Xamarin.FinalCtrl.TabViewCtrl
+namespace Xamarin.FinalCtrl
 {
     internal class TabItem
     {
