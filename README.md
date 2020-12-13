@@ -5,7 +5,7 @@ Simple and slim controls designed for easy use
 ![Nuget](https://img.shields.io/nuget/v/Xamarin.FinalCtrl?style=plastic)
 
 
-####TabView
+## TabView
 
 - Get the Namespace:
 ```xml
@@ -32,7 +32,7 @@ Simple and slim controls designed for easy use
         </ctrl:TabView.TabTemplate>
     </ctrl:TabView>
 ```
-####Properties:
+## Properties:
 - ContentTemplateSelector: Selectes the Template for your Tab
 - Itemssource: The list of Tabs(ViewModels) you want to use
 - TabPosition: You want the Tabs on the Top or Bottom?
@@ -40,7 +40,7 @@ Simple and slim controls designed for easy use
 
 **Note:** If your Items implement *ITabItem*  you can access the *IsSelected* property in your bindings (See TabTemplate above).
 
-
+------------
 Feel free to submit improvements or file Issues/Pull requests, but keep in mind: 
 This controls aim to be as simple as possible.
 
