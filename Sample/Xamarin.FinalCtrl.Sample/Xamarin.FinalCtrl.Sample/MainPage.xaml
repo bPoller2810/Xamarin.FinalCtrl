@@ -1,0 +1,57 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage xmlns="http://xamarin.com/schemas/2014/forms"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             xmlns:ctrl="clr-namespace:Xamarin.FinalCtrl;assembly=Xamarin.FinalCtrl"
+             xmlns:vm="clr-namespace:Xamarin.FinalCtrl.Sample.ViewModels"
+             xmlns:selector="clr-namespace:Xamarin.FinalCtrl.Sample.ContentSelectors"
+             xmlns:conv="clr-namespace:Xamarin.FinalCtrl.Sample.Converter"
+             x:Class="Xamarin.FinalCtrl.Sample.MainPage"
+             BackgroundColor="White">
+    <ContentPage.BindingContext>
+        <vm:MainPageViewModel />
+    </ContentPage.BindingContext>
+    <ContentPage.Resources>
+        <ResourceDictionary>
+            <selector:MainTabContentSelector x:Key="TabContentSelector" />
+
+            <conv:TabTypeToImageConverter x:Key="TabTypeToImageConverter" />
+            <conv:SelectedToColorConverter x:Key="SelectedToColorConverter" />
+            <conv:TabTypeToStringConverter x:Key="TabTypeToStringConverter" />
+        </ResourceDictionary>
+    </ContentPage.Resources>
+
+    <Grid RowDefinitions="Auto,*"
+          RowSpacing="0">
+
+        <ctrl:Toolbar Text="{Binding SelectedTab.TabType, Converter={StaticResource TabTypeToStringConverter}}"
+                      TextColor="Black"
+                      Background="LightGray"
+                      RightCommand="{Binding SelectSettingsCommand}">
+            <ctrl:Toolbar.RightContent>
+                <Label HorizontalOptions="Center"
+                       VerticalOptions="Center"
+                       Margin="5"
+                       Text="Settings"
+                       TextColor="Black" />
+            </ctrl:Toolbar.RightContent>
+        </ctrl:Toolbar>
+
+        <ctrl:TabView Grid.Row="1"
+                      Itemssource="{Binding Tabs}"
+                      SelectedItem="{Binding SelectedTab,Mode=TwoWay}"
+                      TabPosition="Bottom"
+                      ContentTemplateSelector="{StaticResource TabContentSelector}">
+            <ctrl:TabView.TabContent>
+                <ControlTemplate>
+                    <ContentView Padding="10"
+                                 BackgroundColor="LightGray">
+                        <ctrl:TintableImage TintColor="{Binding IsSelected, Converter={StaticResource SelectedToColorConverter}}"
+                                            Source="{Binding TabType, Converter={StaticResource TabTypeToImageConverter}}" />
+                    </ContentView>
+                </ControlTemplate>
+            </ctrl:TabView.TabContent>
+        </ctrl:TabView>
+
+    </Grid>
+
+</ContentPage>
