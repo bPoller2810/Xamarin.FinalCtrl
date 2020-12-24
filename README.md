@@ -12,6 +12,14 @@ Simple and slim controls designed for easy use
 ```
 - Ready to go !
 
+## TintableImage
+```xml
+<ctrl:TintableImage Source="image.png"
+                    TintColor="Red" />
+```
+#### Properties:
+ - TintColor: Colors the Image in the specified Color
+
 ## Toolbar:
 ```xml
 <ctrl:Toolbar Text="{Binding SelectedItem.Title}"
@@ -24,9 +32,7 @@ Simple and slim controls designed for easy use
         <Image Source="{Binding Icon}" />
     </ctrl:Toolbar.RightContent>
 </ctrl:Toolbar>
-
 ```
-
 #### Properties
 - Text: Centralized Text
 - TextColor: The color of your Text
@@ -37,7 +43,6 @@ Simple and slim controls designed for easy use
 - Left/Right-CommandParameter: All types of objects attached to the execution of your command
 
 ## TabView:
-
 ```xml
 <ctrl:TabView
     ContentSelector="{StaticResource MainViewSelector}"
@@ -56,7 +61,6 @@ Simple and slim controls designed for easy use
     </ctrl:TabView.TabTemplate>
 </ctrl:TabView>
 ```
-
 #### Properties:
 - ContentSelector (IContentSelector): Selects the Content for your Tab (This creates a new Instance each time)
 - Itemssource: The list of Tabs(ViewModels) you want to use
@@ -64,6 +68,10 @@ Simple and slim controls designed for easy use
 - TabContent: The ControlTemplate for the individual Tabs.
 
 **Note:** If your Items implement *ITabItem*  you can access the *IsSelected* property in your bindings (See TabTemplate above).
+
+------------
+
+**Helpfull:** Check out the Sample Project! MainPage.xaml should lead you to all places you need
 
 ------------
 Feel free to submit improvements or file Issues/Pull requests, but keep in mind: 
