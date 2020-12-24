@@ -3,7 +3,7 @@
   <PropertyGroup>
     <TargetFramework>netstandard2.0</TargetFramework>
 	  <LangVersion>9.0</LangVersion>
-	  <GeneratePackageOnBuild>true</GeneratePackageOnBuild>
+	  <GeneratePackageOnBuild>false</GeneratePackageOnBuild>
 	  <Authors>Bernhard Pollerspöck</Authors>
 	  <Description>Simple and slim Xamarin.Forms controls designed for easy use</Description>
 	  <PackageProjectUrl>https://github.com/bPoller2810/Xamarin.FinalCtrl</PackageProjectUrl>
@@ -12,7 +12,7 @@
 	  <PackageLicenseExpression></PackageLicenseExpression>
 	  <Copyright>Bernhard Pollerspöck</Copyright>
 	  <PackageLicenseFile>LICENSE</PackageLicenseFile>
-	  <Version>1.2.0</Version>
+	  <Version>1.2.2</Version>
   </PropertyGroup>
 
   <ItemGroup>
