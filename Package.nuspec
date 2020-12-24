@@ -1,0 +1,25 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<package xmlns="http://schemas.microsoft.com/packaging/2011/08/nuspec.xsd">
+  <metadata>
+    <id>Xamarin.FinalCtrl</id>
+    <version>2.0.0</version>
+    <title>Xamarin.FinalCtrl</title>
+    <authors>Bernhard Pollerspöck</authors>
+    <owners>Bernhard Pollerspöck</owners>
+    <requireLicenseAcceptance>false</requireLicenseAcceptance>
+    <projectUrl>https://github.com/bPoller2810/Xamarin.FinalCtrl</projectUrl>
+    <description>Simple and slim Xamarin.Forms controls designed for easy use</description>
+    <copyright>Bernhard Pollerspöck</copyright>
+    <dependencies>
+      <dependency id="Xamarin.Forms" version="4.8.0.1687" />
+    </dependencies>
+  </metadata>
+  <files>
+    <file src="lib\MonoAndroid\Xamarin.FinalCtrl.dll" target="lib\MonoAndroid\Xamarin.FinalCtrl.dll" />
+    <file src="lib\MonoAndroid\Xamarin.FinalCtrl.Droid.dll" target="lib\MonoAndroid\Xamarin.FinalCtrl.Droid.dll" />
+    <file src="lib\MonoAndroid\Xamarin.FinalCtrl.Droid.pdb" target="lib\MonoAndroid\Xamarin.FinalCtrl.Droid.pdb" />
+    <file src="lib\MonoAndroid\Xamarin.FinalCtrl.pdb" target="lib\MonoAndroid\Xamarin.FinalCtrl.pdb" />
+    <file src="lib\netstandard2.0\Xamarin.FinalCtrl.dll" target="lib\netstandard2.0\Xamarin.FinalCtrl.dll" />
+    <file src="lib\netstandard2.0\Xamarin.FinalCtrl.pdb" target="lib\netstandard2.0\Xamarin.FinalCtrl.pdb" />
+  </files>
+</package>
